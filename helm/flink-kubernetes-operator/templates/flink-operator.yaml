@@ -114,6 +114,10 @@ spec:
             - name: {{ $v.name | quote }}
               value: {{ $v.value | quote }}
             {{- end }}
+          envFrom:
+            {{- if .Values.operatorPod.envFrom }}
+            {{- .Values.operatorPod.envFrom | toYaml | nindent 12 }}
+            {{- end }}
           resources:
             {{- toYaml .Values.operatorPod.resources | nindent 12 }}
           securityContext:
